@@ -1,0 +1,37 @@
+name: qrc
+description: "A new Flutter project."
+publish_to: "none"
+version: 0.1.0
+
+environment:
+  sdk: ^3.8.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  qr_flutter: ^4.1.0
+  file_picker: ^8.1.4
+  path_provider: ^2.1.5
+  share_plus: ^10.1.2
+  gal: ^2.3.0
+  permission_handler: ^11.3.1
+  url_launcher: ^6.3.1
+  firebase_storage: ^12.3.6
+  firebase_core: ^3.8.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.14.1
+
+flutter:
+  uses-material-design: true
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "lib/resource/Design sans titre.png"
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: "lib/resource/Design sans titre.png"
+  remove_alpha_ios: true

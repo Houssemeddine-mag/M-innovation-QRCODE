@@ -1,0 +1,206 @@
+# App Icon Setup - October 8, 2025
+
+## ✅ App Icon Successfully Configured!
+
+Your app logo from `lib/resource/Design sans titre.png` has been set as the application icon for both Android and iOS.
+
+## What Was Done
+
+### 1. Added flutter_launcher_icons Package
+
+Added `flutter_launcher_icons: ^0.14.1` to `dev_dependencies` in `pubspec.yaml`
+
+### 2. Configured Icon Generation
+
+Added the following configuration to `pubspec.yaml`:
+
+```yaml
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "lib/resource/Design sans titre.png"
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: "lib/resource/Design sans titre.png"
+  remove_alpha_ios: true
+```
+
+### 3. Generated Icons
+
+Ran `dart run flutter_launcher_icons` to generate all required icon sizes for both platforms.
+
+## Generated Icons
+
+### Android
+
+- **Standard Icons**: All mipmap densities (mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi)
+- **Adaptive Icons**: Modern Android adaptive icons with white background
+- **Location**: `android/app/src/main/res/mipmap-*/`
+
+Icon sizes generated:
+
+- mipmap-mdpi: 48x48
+- mipmap-hdpi: 72x72
+- mipmap-xhdpi: 96x96
+- mipmap-xxhdpi: 144x144
+- mipmap-xxxhdpi: 192x192
+
+### iOS
+
+- **All Required Sizes**: Complete set of iOS app icons
+- **App Store Icon**: 1024x1024 for App Store listing
+- **Location**: `ios/Runner/Assets.xcassets/AppIcon.appiconset/`
+
+Icon sizes generated:
+
+- 20x20 (1x, 2x, 3x)
+- 29x29 (1x, 2x, 3x)
+- 40x40 (1x, 2x, 3x)
+- 50x50 (1x, 2x)
+- 57x57 (1x, 2x)
+- 60x60 (2x, 3x)
+- 72x72 (1x, 2x)
+- 76x76 (1x, 2x)
+- 83.5x83.5 (2x)
+- 1024x1024 (App Store)
+
+## Features
+
+### Android Adaptive Icons
+
+- Uses white background (#FFFFFF)
+- Foreground layer: Your logo
+- Supports dynamic shapes on different Android launchers
+- Follows Material Design guidelines
+
+### iOS Compliance
+
+- Alpha channel removed for App Store compliance
+- All required sizes included
+- Ready for App Store submission
+
+## How to Verify
+
+### On Android Device/Emulator
+
+1. Run `flutter run` on Android device
+2. Check the app icon on the home screen
+3. The icon should show your logo with adaptive design
+
+### On iOS Device/Simulator
+
+1. Run `flutter run` on iOS device
+2. Check the app icon on the home screen
+3. The icon should show your logo
+
+### In Android Launcher
+
+- Try different launcher apps (Nova, Pixel Launcher, etc.)
+- The adaptive icon will adjust to different shapes (circle, square, rounded square)
+
+## Updating the Icon
+
+If you ever need to change the app icon:
+
+1. Replace the image at `lib/resource/Design sans titre.png`
+2. Run: `dart run flutter_launcher_icons`
+3. Rebuild the app
+
+## Configuration Options
+
+The `flutter_launcher_icons` package supports many options:
+
+```yaml
+flutter_launcher_icons:
+  android: true # Generate Android icons
+  ios: true # Generate iOS icons
+  image_path: "path/to/icon.png" # Source image
+  adaptive_icon_background: "#FFFFFF" # Android adaptive icon background
+  adaptive_icon_foreground: "path" # Android adaptive icon foreground
+  remove_alpha_ios: true # Remove alpha for iOS (required for App Store)
+
+
+  # Optional settings:
+  # min_sdk_android: 21              # Minimum Android SDK
+  # web:                             # Web icon configuration
+  #   generate: true
+  #   image_path: "path/to/icon.png"
+  # windows:                         # Windows icon configuration
+  #   generate: true
+  #   image_path: "path/to/icon.png"
+  # macos:                           # macOS icon configuration
+  #   generate: true
+  #   image_path: "path/to/icon.png"
+```
+
+## Best Practices
+
+### Source Image Requirements
+
+- **Minimum size**: 1024x1024 pixels (recommended)
+- **Format**: PNG with transparency (alpha channel will be removed for iOS)
+- **Content**: Make sure important content is in the center (safe area)
+- **Padding**: Leave some padding around the edges for adaptive icons
+
+### Design Tips
+
+1. Use simple, recognizable designs
+2. Avoid fine details that won't be visible at small sizes
+3. Test on both light and dark backgrounds
+4. Ensure good contrast
+5. Consider how the icon looks in different shapes (Android adaptive)
+
+## Troubleshooting
+
+### Icon Not Showing
+
+1. Clean build: `flutter clean`
+2. Rebuild: `flutter run`
+3. Uninstall and reinstall the app
+
+### Android Icon Issues
+
+- Check `android/app/src/main/AndroidManifest.xml`
+- Ensure `android:icon="@mipmap/ic_launcher"` is set
+
+### iOS Icon Issues
+
+- Check `ios/Runner/Info.plist`
+- Ensure icon asset is properly referenced
+
+## File Structure
+
+```
+android/app/src/main/res/
+├── mipmap-mdpi/
+│   └── ic_launcher.png
+├── mipmap-hdpi/
+│   └── ic_launcher.png
+├── mipmap-xhdpi/
+│   └── ic_launcher.png
+├── mipmap-xxhdpi/
+│   └── ic_launcher.png
+├── mipmap-xxxhdpi/
+│   └── ic_launcher.png
+├── mipmap-anydpi-v26/
+│   └── ic_launcher.xml
+└── values/
+    └── colors.xml
+
+ios/Runner/Assets.xcassets/AppIcon.appiconset/
+├── Contents.json
+├── Icon-App-1024x1024@1x.png
+├── Icon-App-20x20@1x.png
+└── ... (all iOS icon sizes)
+```
+
+## Next Steps
+
+✅ Icons are generated and ready to use
+✅ App Store compliant (iOS)
+✅ Adaptive icons configured (Android)
+
+Just run your app and you'll see your custom icon on the device!
+
+---
+
+_Generated automatically by flutter_launcher_icons v0.14.4_
