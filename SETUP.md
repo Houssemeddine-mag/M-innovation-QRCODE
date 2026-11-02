@@ -225,4 +225,4 @@ service firebase.storage {
 
 - Check the [Flutter Documentation](https://flutter.dev/docs)
 - Visit [Firebase Documentation](https://firebase.google.com/docs)
-- Review the README.md for feature details
+- Review the README.md for a product overview and documentation.md for technical details

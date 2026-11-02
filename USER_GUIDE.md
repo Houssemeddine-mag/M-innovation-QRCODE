@@ -233,7 +233,7 @@ The app needs the following permissions:
 
 ## Need More Help?
 
-- Check the **README.md** for technical details
+- Check the **documentation.md** for technical details
 - Review the **SETUP.md** for advanced configuration
 - Report issues on GitHub (if applicable)
 - Contact support (if applicable)
