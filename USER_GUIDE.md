@@ -1,5 +1,7 @@
 # QR Code Generator - User Guide
 
+> **Platform note:** This release supports **Android only**. iOS, desktop, and web are not currently supported.
+
 ## Welcome! 👋
 
 This app allows you to quickly generate QR codes from various sources including URLs, images, videos, PDFs, and any other files.
@@ -179,7 +181,7 @@ Share WiFi credentials (future feature)
 
 The app needs the following permissions:
 
-### 📸 Photo Library (iOS/Android)
+### 📸 Photo Library (Android)
 
 - **Why:** To save QR codes to your device
 - **When:** Only when you tap the "Save" button

@@ -38,10 +38,11 @@ There is no state-management package, router, dependency-injection container, or
 ## 3. Requirements
 
 - Flutter SDK compatible with Dart `^3.8.1`
-- Android Studio (Android) or Xcode (iOS/macOS)
-- An emulator, simulator, or physical device
-- For iOS builds: macOS with Xcode and CocoaPods
+- Android Studio with the Android SDK
+- An Android emulator or a physical Android device
 - For release builds: your own signing configuration
+
+Only Android is required. iOS, desktop, and web are not supported.
 
 Verify the toolchain with:
 
@@ -101,10 +102,10 @@ qrc/
 │       └── Design sans titre.png        # Source image for launcher icons
 ├── test/
 │   └── qr_data_test.dart                # Unit tests for QRData
-├── android/                             # Android host project
-├── ios/                                 # iOS host project
-├── web/                                 # Web host project
-├── windows/ macos/ linux/               # Desktop host projects
+├── android/                             # Supported platform
+├── ios/                                 # Unverified scaffolding (not supported)
+├── web/                                 # Unverified scaffolding (not supported)
+├── windows/ macos/ linux/               # Unverified scaffolding (not supported)
 ├── pubspec.yaml                         # Dependencies and icon configuration
 ├── analysis_options.yaml                # flutter_lints configuration
 ├── documentation.md                     # This file
@@ -151,7 +152,7 @@ There is no URL scheme validation or normalization beyond trimming.
 ### Export flow
 
 - **Share:** `RepaintBoundary.toImage(pixelRatio: 3.0)` → PNG bytes → temporary file → `Share.shareXFiles(...)`.
-- **Save:** request `Permission.photos` on Android/iOS → capture the same PNG → write to the temporary directory → `Gal.putImage(path)`.
+- **Save:** request `Permission.photos` on Android/iOS (iOS is not a supported target) → capture the same PNG → write to the temporary directory → `Gal.putImage(path)`.
 - Errors are caught and shown in a red snackbar.
 
 ### Reset
@@ -260,7 +261,16 @@ Declared in `pubspec.yaml`:
 
 ---
 
-## 9. Platform configuration
+## 9. Platform status and configuration
+
+Only **Android** is supported and verified. The other platform folders are scaffolding and are not expected to build or run correctly.
+
+| Platform | Status |
+| --- | --- |
+| Android | **Supported and verified** |
+| iOS | **Not supported** — the Xcode project exists, but there is no `Podfile`/Pods setup and no verified build |
+| Windows / macOS / Linux | **Not supported** — Flutter scaffolding only |
+| Web | **Not supported** — `dart:io` imports prevent compilation |
 
 ### Android
 
@@ -285,7 +295,9 @@ Permissions in `android/app/src/main/AndroidManifest.xml`:
 
 ### iOS
 
-`ios/Runner/Info.plist` declares:
+**Not supported.** The `ios/` folder exists, but the project has no `Podfile` or Pods installation and no iOS build has been verified.
+
+`ios/Runner/Info.plist` declares the following keys, which would be relevant only if iOS support is added later:
 
 | Key | Purpose |
 | --- | --- |
@@ -297,10 +309,10 @@ Display name: `Innov QR Scan`.
 
 ### Web and desktop
 
-- Host projects exist for web, Windows, macOS, and Linux.
-- Web is not currently buildable because of `dart:io` imports in `qr_display_widget.dart` and `file_storage_service.dart`.
-- Desktop support has not been verified. `gal` and `permission_handler` behavior varies by platform.
-- Treat Android and iOS as the supported targets for now.
+- **Not supported.** Host projects exist for web, Windows, macOS, and Linux, but they are scaffolding only.
+- Web does not compile because of `dart:io` imports in `qr_display_widget.dart` and `file_storage_service.dart`.
+- Desktop builds have not been verified. `gal`, `permission_handler`, and `share_plus` behavior varies by platform.
+- Treat Android as the only supported target.
 
 ---
 
@@ -330,18 +342,20 @@ flutter test
 ### Build
 
 ```bash
-# Android
+# Android (supported)
 flutter build apk --debug
 flutter build apk --release
 flutter build appbundle --release
+```
 
-# iOS (requires macOS + Xcode)
-flutter build ios --release
+The following targets are **not supported** and are not expected to build without additional configuration:
 
-# Desktop (not officially verified)
-flutter build windows
-flutter build macos
-flutter build linux
+```bash
+# flutter build ios --release      # no Podfile/Pods setup; requires macOS + Xcode
+# flutter build windows
+# flutter build macos
+# flutter build linux
+# flutter build web                # blocked by dart:io imports
 ```
 
 ### Clean
@@ -368,7 +382,7 @@ The repository includes a ready-to-use service but no active Firebase setup. The
 High-level steps (full details in [SETUP.md](SETUP.md)):
 
 1. Create a Firebase project.
-2. Register the Android app with package `com.example.qrc` and/or the iOS app with the matching bundle ID.
+2. Register the Android app with package `com.example.qrc`. Register an iOS app only if you add iOS support.
 3. Download `google-services.json` into `android/app/` and/or `GoogleService-Info.plist` into `ios/Runner/`.
 4. Add the Google Services Gradle plugin to the Android project.
 5. Enable Firebase Storage and configure security rules.
@@ -409,14 +423,14 @@ There are no widget or integration tests. A manual checklist for release verific
 - [ ] Clear the QR code and switch between input types.
 - [ ] Verify light and dark themes.
 - [ ] Verify behavior on Android 12 and below, and Android 13+.
-- [ ] Verify behavior on iOS with permission denied and granted.
+- [ ] Verify behavior on Android with permission denied and granted.
 
 ---
 
 ## 13. Build history
 
 - **Gallery dependency fix (October 2025):** `image_gallery_saver` 2.0.3 failed with *"Namespace not specified"* under newer Android Gradle Plugin versions. It was replaced with `gal` 2.3.0. See [BUILD_FIX.md](BUILD_FIX.md).
-- **Launcher icons:** Generated with `flutter_launcher_icons` 0.14.x for Android and iOS, including adaptive Android icons with a white background. See [APP_ICON_SETUP.md](APP_ICON_SETUP.md).
+- **Launcher icons:** Generated with `flutter_launcher_icons` 0.14.x for Android and iOS assets, including adaptive Android icons with a white background. Only the Android icons are part of a supported build. See [APP_ICON_SETUP.md](APP_ICON_SETUP.md).
 
 ---
 
@@ -431,8 +445,9 @@ There are no widget or integration tests. A manual checklist for release verific
 | Unused dependency | `url_launcher` is declared but not used. |
 | Input rebuild | `InputSection` calls `markNeedsBuild()` from `onChanged` instead of using state or a listenable. |
 | Permissions | `Permission.photos` behavior differs across Android versions; the save flow should be tested on Android 12 and below. |
-| Web | `dart:io` imports block web compilation. |
-| Desktop | Not tested; gallery/permission plugins may not support all desktop targets. |
+| Web | Not supported; `dart:io` imports block web compilation. |
+| Desktop | Not supported; scaffolding only, builds not verified. |
+| iOS | Not supported; no Podfile/Pods setup and no verified build. |
 | Release readiness | App ID is still `com.example.qrc`, and release builds are signed with debug keys. |
 | CI/CD | No automated pipeline for analyze, test, or build. |
 | Placeholder files | `BUILD_STATUS.md`, `BUILD_WORKAROUND.md`, and `build-and-install.ps1` are empty. |

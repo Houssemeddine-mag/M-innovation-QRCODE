@@ -31,7 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Share Function**: Share via system share sheet
 - **Clear Function**: Easy reset to start over
 - **Modern UI**: Material Design 3 with dynamic theming
-- **Cross-platform**: Support for Android, iOS, Web, Windows, macOS, Linux
+- **Cross-platform scaffolding**: Android is the supported target; iOS, web, and desktop folders exist but are unverified
 
 ### Dependencies
 
@@ -39,7 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - file_picker: ^8.1.4 - File selection
 - path_provider: ^2.1.5 - System paths
 - share_plus: ^10.1.2 - Share functionality
-- image_gallery_saver: ^2.0.3 - Save to gallery
+- gal: ^2.3.0 - Save to gallery
 - permission_handler: ^11.3.1 - Permission management
 - url_launcher: ^6.3.1 - URL handling
 - firebase_storage: ^12.3.6 - Cloud storage (optional)

@@ -1,5 +1,7 @@
 # Setup Guide for QR Code Generator App
 
+> **Platform note:** Only **Android** is currently supported. The iOS and desktop sections below are reference material for future work and have not been verified.
+
 ## Quick Start (Basic Version - No Firebase)
 
 The app works out of the box for basic functionality without Firebase. For large files, you'll need Firebase Storage.

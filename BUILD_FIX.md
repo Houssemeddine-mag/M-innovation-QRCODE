@@ -70,7 +70,7 @@ await Gal.putImage(filePath);
 2. ✅ **Better Performance** - More efficient image saving
 3. ✅ **Simpler API** - Cleaner, easier to use interface
 4. ✅ **Better Error Handling** - More descriptive errors
-5. ✅ **Cross-platform** - Works on Android, iOS, Web
+5. ✅ **Platform support** - Works on Android, the currently supported target
 
 ## Verification
 

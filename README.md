@@ -7,7 +7,7 @@ Innov QR Scan is a Flutter application that creates QR codes from web links or f
 ![Flutter](https://img.shields.io/badge/Flutter-3.x-02569B?logo=flutter&logoColor=white)
 ![Dart](https://img.shields.io/badge/Dart-3.8%2B-0175C2?logo=dart&logoColor=white)
 ![Version](https://img.shields.io/badge/version-0.1.0-blue)
-![Platforms](https://img.shields.io/badge/platforms-Android%20%7C%20iOS%20%7C%20Desktop-lightgrey)
+![Platforms](https://img.shields.io/badge/platforms-Android%20only-3DDC84?logo=android&logoColor=white)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 ---
@@ -45,7 +45,7 @@ Everything is generated locally on your device. Nothing is uploaded or tracked b
 - **Link to QR** — paste a URL and generate a QR code instantly.
 - **File to QR** — pick any file type (images, videos, PDFs, documents, and more) and generate a code for it.
 - **High-quality output** — QR codes are rendered at 3x resolution when saved or shared.
-- **Save to gallery** — store the generated QR code as a PNG on mobile.
+- **Save to gallery** — store the generated QR code as a PNG on Android.
 - **Share anywhere** — send the QR image through any app installed on your device.
 - **Clear and start over** — reset the current code with one tap.
 - **Material 3 design** — a clean interface that follows your system light or dark theme.
@@ -55,14 +55,16 @@ Everything is generated locally on your device. Nothing is uploaded or tracked b
 
 ## Supported platforms
 
-Innov QR Scan is **mobile-first** and is primarily developed and tested for Android and iOS.
+**Only Android is currently supported and tested.**
+
+The repository contains Flutter host projects for other platforms, but they have not been built, configured, or verified. Do not expect them to work without additional setup.
 
 | Platform | Status |
 | --- | --- |
-| Android | Primary target |
-| iOS | Primary target |
-| Windows / macOS / Linux | Project scaffolding exists; not officially verified |
-| Web | Project scaffolding exists; not currently supported |
+| Android | **Supported** — the only verified target |
+| iOS | **Not supported** — the Xcode project exists, but there is no Podfile/Pods setup and no verified iOS build |
+| Windows / macOS / Linux | **Not supported** — Flutter scaffolding only |
+| Web | **Not supported** — the app uses `dart:io` and does not compile for web |
 
 ---
 
@@ -122,7 +124,7 @@ A more detailed walkthrough is available in [USER_GUIDE.md](USER_GUIDE.md).
 
 - **File QR codes reference a local path.** The generated code contains the path of the selected file, not the file itself. It is most useful as a reference on the same device. To share a file with other people, host it online (Google Drive, Dropbox, a website) and encode that link instead.
 - **This is a generator, not a scanner.** The name says "Scan", but scanning is a planned feature. The current release creates QR codes only.
-- **Save to gallery is a mobile feature.** Sharing works through your device's system share sheet.
+- **Save to gallery is Android-only in the current release.** Sharing works through your device's system share sheet.
 - **Internet is not required.** QR codes are created locally. The Firebase helper included in the project is optional and is not active in the current UI.
 - **Large or complex data may not fit in a QR code.** Shorter links produce simpler, easier-to-scan codes.
 
@@ -141,8 +143,9 @@ qrc/
 │   ├── widgets/                  # Reusable UI components
 │   └── resource/                 # App icon source image
 ├── test/                         # Unit tests
-├── android/ ios/ web/            # Platform projects
-├── windows/ macos/ linux/        # Desktop projects
+├── android/                      # Supported platform
+├── ios/ web/                     # Unverified scaffolding (not supported)
+├── windows/ macos/ linux/        # Unverified scaffolding (not supported)
 ├── documentation.md              # Technical documentation
 ├── SETUP.md                      # Environment and Firebase setup
 ├── USER_GUIDE.md                 # End-user guide
